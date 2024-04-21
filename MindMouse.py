@@ -6,7 +6,9 @@ import webbrowser as wb
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
-import threading
+
+cam = input("Enter Specified Camera(0 for built in Webcam, the rest for others): ")
+cam = int(cam)
 
 devices = AudioUtilities.GetSpeakers()
 interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
@@ -43,7 +45,7 @@ with mp_pose.Pose(
     # Set a lower frame size
     frame_width, frame_height = 2000, 2000
 
-    cap = cv2.VideoCapture(1)  # replace "video_path" with "0" for webcam access
+    cap = cv2.VideoCapture(cam)  # replace "video_path" with "0" for webcam access
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, frame_width)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, frame_height)
 
